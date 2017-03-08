@@ -13,7 +13,7 @@ import java.sql.Connection
 
 object Phx extends Serializable {
    Class.forName("org.apache.phoenix.jdbc.PhoenixDriver")
-   val zk = scala.util.Properties.envOrElse("ZK", "localhost" );
+   val zk = scala.util.Properties.envOrElse("ZK_LIST", "localhost" );
    val connection:Connection=DriverManager.getConnection(s"jdbc:phoenix:$zk");
    val sql = "UPSERT INTO SENSOR (FT, ID, M) VALUES (to_date(?, 'ssssssssssSSS'), ?, ?)"
 
