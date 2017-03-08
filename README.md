@@ -27,6 +27,7 @@ CONSTRAINT PK PRIMARY KEY (FT DESC,ID)
 ## Zeppline
 
 default.driver : org.apache.phoenix.jdbc.PhoenixDrive
+
 default.url : jdbc:phoenix:zk-0.zk:/hbase
 
 
