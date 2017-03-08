@@ -35,6 +35,10 @@ default.url : jdbc:phoenix:zk-0.zk:/hbase
 
 kubectl -s api:8080 exec -it sm-0 bash
 
+git clone https://github.com/reza-rahim/spark.git
+
+cd spark 
+
 sbt console 
 
 val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("KafkaDstreamPhx"); val ssc =  KafkaDstreamPhx.getStreamContext(conf, 3, "message");ssc.start
