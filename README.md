@@ -39,6 +39,22 @@ sbt console
 val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("KafkaDstreamPhx"); val ssc =  KafkaDstreamPhx.getStreamContext(conf, 3, "message");ssc.start
 
 
+## port forwarding
+
+ssh vagrant@10.0.15.10 -L 50070:localhost:50070 -L 16010:localhost:16010 -L 8080:localhost:8080 -L 8081:localhost:8081  -L 4040:localhost:4040 -L 30001:10.0.15.11:30001
+
+kubectl -s api:8080 port-forward nn-0 50070:50070 &
+
+kubectl -s api:8080 port-forward hm-0 16010:16010 &
+
+kubectl -s api:8080 port-forward sm-0 8080:8080 &
+
+kubectl -s api:8080 port-forward sm-0 4040:4040 &
+
+kubectl -s api:8080 port-forward sw-0 8081:8081 &
+
 ## Message
 
 curl -H "Content-Type: application/json" -X POST -d '{"msg":"2017-03-08 13:50:19.365,3,56"}'  http://10.0.15.11:32000/api
+
+
