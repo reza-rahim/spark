@@ -9,7 +9,7 @@ kafka-topics.sh --create --zookeeper zk-0.zk:2181 --replication-factor 1 --parti
 kafka-console-producer.sh --broker-list kafka-0.kafka:9092 --topic message
 
 ### kafka consumer
-kafka-console-consumer.sh --topic message --from-beginning --zookeeper zk-2.zk:2181
+kafka-console-consumer.sh --topic message --from-beginning --zookeeper zk-0.zk:2181
 
 
 ## Phx
@@ -59,6 +59,11 @@ kubectl -s api:8080 port-forward sm-0 4040:4040 &
 kubectl -s api:8080 port-forward sw-0 8081:8081 &
 
 ## Message
+### from kafka client
+
+2017-03-08 13:50:19.365,3,56
+
+### from nodecli
 
 curl -H "Content-Type: application/json" -X POST -d '{"msg":"2017-03-08 13:50:19.365,3,56"}'  http://10.0.15.11:32000/api
 
