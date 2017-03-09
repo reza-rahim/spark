@@ -26,4 +26,4 @@ assemblyMergeStrategy in assembly := {
   case _ => MergeStrategy.first
 }
 
-unmanagedBase := file("/root/lib/")
+unmanagedBase := file("/vagrant/code/spark/lib")

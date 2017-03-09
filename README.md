@@ -43,6 +43,9 @@ sbt console
 
 val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("KafkaDstreamPhx"); val ssc =  KafkaDstreamPhx.getStreamContext(conf, 3, "message");ssc.start
 
+/opt/spark/bin/spark-submit --class KafkaDstreamPhx --master spark://sm-0.sm:7077 /path/to/jar
+/opt/spark/bin/spark-submit --class KafkaDstreamPhx --master spark://sm-0.sm:7077 -deploy-mode cluster hdfs://nn-0.nn:9000/path/to/jar
+
 
 ## port forwarding
 

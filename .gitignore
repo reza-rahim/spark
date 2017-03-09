@@ -1,5 +1,6 @@
 *.class
 *.jar
+Slack.scala
 target
 project/target/
 project/project/target/

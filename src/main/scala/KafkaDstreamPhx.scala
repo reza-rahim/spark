@@ -9,15 +9,15 @@ import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 
 object KafkaDstreamPhx {
+   var zkList ="localhost"
 
-   def getStreamContext(conf : SparkConf, interval: Int, kafkaTopic: String ) :StreamingContext = {
+   def getStreamContext(conf : SparkConf, interval: Int, kafkaTopic: String , KafkaBrokerList: String) :StreamingContext = {
 
        val ssc = new StreamingContext(conf, Seconds(interval))
        ssc.sparkContext.setLogLevel("ERROR")
 
-       val kafka=scala.util.Properties.envOrElse("KAFKA_BROKER_LIST", "localhost:9092" )
        val kafkaParams = Map[String, Object](
-          "bootstrap.servers" -> kafka,
+          "bootstrap.servers" -> KafkaBrokerList,
           "key.deserializer" -> classOf[StringDeserializer],
           "value.deserializer" -> classOf[StringDeserializer],
           "group.id" -> "use_a_separate_group_id_for_each_stream",
@@ -58,15 +58,16 @@ object KafkaDstreamPhx {
       /*
        * Running from sbt console
 
-         val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("KafkaDstreamPhx"); val ssc =  KafkaDstreamPhx.getStreamContext(conf, 3, "message");ssc.start
-
+         val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("KafkaDstreamPhx"); val ssc =  KafkaDstreamPhx.getStreamContext(conf, 3, "message", "localhost:9092");ssc.start
        */
 
-      val interval=scala.util.Properties.envOrElse("BATCH_INTERVAL", "3" ).toInt
-      val kafkaTopic=scala.util.Properties.envOrElse("KAFKA_TOPIC", "message" )
+      val interval=3
+      val kafkaTopic= "message" 
+      val KafkaBrokerList = args(0)
+      zkList = args(1)
 
       val conf = new SparkConf().setAppName("KafkaDstreamPhx")
-      val ssc = KafkaDstreamPhx.getStreamContext(conf, interval, kafkaTopic) 
+      val ssc = KafkaDstreamPhx.getStreamContext(conf, interval, kafkaTopic, KafkaBrokerList) 
 
       ssc.start
       ssc.awaitTermination
