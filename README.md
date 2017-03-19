@@ -66,8 +66,11 @@ kubectl -s api:8080 port-forward sw-0 8081:8081 &
 
 2017-03-08 13:50:19.365,3,56
 
-### from nodecli
+### to nodecli
 
 curl -H "Content-Type: application/json" -X POST -d '{"msg":"2017-03-08 13:50:19.365,3,56"}'  http://10.0.15.11:32000/api
+
+### to haproxy
+curl -H "Content-Type: application/json" -X POST -d '{"msg":"2017-03-08 13:50:19.365,3,56"}'  http://10.0.15.10/api
 
 
