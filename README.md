@@ -52,6 +52,9 @@ val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("Ka
 /opt/spark/bin/spark-submit --class KafkaDstreamPhx --master spark://sm-0.sm:7077 -deploy-mode cluster hdfs://nn-0.nn:9000/path/to/jar
 
 
+/opt/spark/bin/spark-submit --class KafkaDstreamPhx --master spark://sm-0.sm:7077 --jars /opt/phoenix/phoenix-4.9.0-HBase-1.2-client.jar --conf spark.executorEnv.	="zk-0.zk"  /pipline/target/scala-2.11/spark-stream-assembly-0.0.1-SNAPSHOT.jar kafka-0.kafka:9092
+
+
 ## port forwarding
 
 ssh vagrant@10.0.15.10 -L 50070:localhost:50070 -L 16010:localhost:16010 -L 8080:localhost:8080 -L 8081:localhost:8081  -L 4040:localhost:4040 -L 30001:10.0.15.11:30001
