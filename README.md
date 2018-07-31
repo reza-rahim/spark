@@ -1,7 +1,7 @@
 # Pipeline
 
 ## Kafka
-kubectl -s api:8080 exec -it kafka-0 bash
+kubectl  exec -it kafka-0 bash
 
 kafka-topics.sh --create --zookeeper zk-0.zk:2181 --replication-factor 1 --partitions 1 --topic message
 
@@ -13,7 +13,7 @@ kafka-console-consumer.sh --topic message --from-beginning --zookeeper zk-0.zk:2
 
 
 ## Phx
-kubectl -s api:8080 exec -it hm-0 bash
+kubectl exec -it hm-0 bash
 
 sqlline.py zk-0.zk
 
@@ -59,15 +59,15 @@ val conf = new org.apache.spark.SparkConf().setMaster("local[2]").setAppName("Ka
 
 ssh vagrant@10.0.15.10 -L 50070:localhost:50070 -L 16010:localhost:16010 -L 8080:localhost:8080 -L 8081:localhost:8081  -L 4040:localhost:4040 -L 30001:10.0.15.11:30001
 
-kubectl -s api:8080 port-forward nn-0 50070:50070 &
+kubectl port-forward nn-0 50070:50070 &
 
-kubectl -s api:8080 port-forward hm-0 16010:16010 &
+kubectl  port-forward hm-0 16010:16010 &
 
-kubectl -s api:8080 port-forward sm-0 8080:8080 &
+kubectl  port-forward sm-0 8080:8080 &
 
-kubectl -s api:8080 port-forward sm-0 4040:4040 &
+kubectl port-forward sm-0 4040:4040 &
 
-kubectl -s api:8080 port-forward sw-0 8081:8081 &
+kubectl  port-forward sw-0 8081:8081 &
 
 ## Message
 ### from kafka client
