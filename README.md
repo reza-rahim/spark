@@ -38,7 +38,7 @@ default.url : jdbc:phoenix:zk-0.zk:/hbase
 
 ## Spark
 
-kubectl -s api:8080 exec -it sm-0 bash
+kubectl exec -it sm-0 bash
 
 git clone https://github.com/reza-rahim/spark.git
 
